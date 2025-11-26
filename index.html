@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كارمكس | CARMEX Auto Care</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           1. الأساسيات
+           ========================================= */
+        :root {
+            --main-dark: #0f172a;        
+            --secondary-dark: #1e293b;   
+            --accent-color: #f59e0b;     
+            --text-light: #f1f5f9;
+            --border-glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--main-dark); color: var(--text-light); overflow-x: hidden; }
+
+        /* =========================================
+           2. الهيدر
+           ========================================= */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000; padding: 15px 5%;
+            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-glass);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-size: 2rem; font-weight: 800; letter-spacing: 1px; color: #fff; font-style: italic; }
+        .logo span { color: var(--accent-color); }
+        
+        .nav-menu { display: flex; gap: 30px; }
+        .nav-menu a { color: #cbd5e1; text-decoration: none; font-weight: 500; transition: 0.3s; }
+        .nav-menu a:hover { color: var(--accent-color); }
+        
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--accent-color), #d97706);
+            color: #000; padding: 10px 30px; border-radius: 4px; text-decoration: none; font-weight: 800;
+            transition: 0.3s; transform: skewX(-10deg); display: inline-block; cursor: pointer; border: none;
+        }
+        .cta-btn span { display: block; transform: skewX(10deg); }
+        .cta-btn:hover { background: #fff; color: #000; transform: skewX(-10deg) translateY(-2px); }
+
+        /* =========================================
+           3. المحتوى الرئيسي
+           ========================================= */
+        .hero {
+            min-height: 100vh; position: relative; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%; overflow: hidden;
+            background: radial-gradient(circle at 20% 50%, #1e293b 0%, #0f172a 100%);
+        }
+        .hero-shape {
+            position: absolute; top: 0; left: -20%; width: 60%; height: 100%;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), transparent);
+            transform: skewX(-20deg); z-index: 0;
+        }
+        .hero-text { width: 45%; z-index: 2; }
+        .hero-text h1 { font-size: 4.5rem; line-height: 1; margin-bottom: 20px; color: #fff; text-transform: uppercase; }
+        .hero-text h1 span { color: transparent; -webkit-text-stroke: 2px var(--accent-color); }
+        .hero-text p { font-size: 1.2rem; color: #94a3b8; margin-bottom: 40px; line-height: 1.8; }
+        .hero-image { width: 55%; position: relative; z-index: 2; display: flex; justify-content: center; }
+        .hero-image img { width: 100%; max-width: 700px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+
+        /* شريط المميزات */
+        .features-strip {
+            display: flex; justify-content: center; gap: 30px; padding: 40px; margin-top: -80px; position: relative; z-index: 5; flex-wrap: wrap;
+        }
+        .feature-box {
+            background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(15px); border: 1px solid var(--border-glass);
+            padding: 25px; border-radius: 10px; width: 280px; text-align: center; color: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: 0.4s;
+        }
+        .feature-box:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+        .feature-box i { font-size: 2rem; color: var(--accent-color); margin-bottom: 15px; }
+
+        /* =========================================
+           4. قسم الخدمات
+           ========================================= */
+        .services-section { padding: 120px 5%; background-color: var(--secondary-dark); position: relative; }
+        .section-header { margin-bottom: 60px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
+        .section-header h2 { font-size: 3rem; color: #fff; position: relative; padding-right: 20px; margin: 0; }
+        .section-header h2::before { content: ''; position: absolute; right: 0; top: 10px; height: 70%; width: 5px; background: var(--accent-color); }
+        .view-all-link { color: #fff; text-decoration: none; border-bottom: 2px solid var(--accent-color); padding-bottom: 5px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .view-all-link:hover { color: var(--accent-color); }
+        .services-container { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 40px; scrollbar-width: none; }
+        .services-container::-webkit-scrollbar { display: none; }
+        .service-card-tall { min-width: 300px; height: 400px; position: relative; border-radius: 15px; overflow: hidden; cursor: pointer; transition: 0.5s; flex-shrink: 0; border: 1px solid #333; background: #000; }
+        .service-card-tall img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .service-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.7) 60%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 30px 20px; transform: translateY(0); height: 50%; }
+        .service-overlay h3 { font-size: 1.8rem; margin-bottom: 8px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); border-right: 4px solid var(--accent-color); padding-right: 10px; }
+        .service-overlay p { opacity: 1; font-size: 1rem; color: #e2e8f0; line-height: 1.5; transform: translateY(0); }
+        .service-card-tall:hover { min-width: 340px; border-color: var(--accent-color); }
+        .service-card-tall:hover img { transform: scale(1.05); }
+        .service-card-tall:hover .service-overlay { background: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(15,23,42,0.8) 100%); }
+
+        /* =========================================
+           5. قسم الحجز
+           ========================================= */
+        .booking-section { padding: 80px 5%; background: var(--main-dark); border-top: 1px solid #333; }
+        .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .booking-form { background: var(--secondary-dark); padding: 40px; border-radius: 15px; border: 1px solid #334155; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: #cbd5e1; margin-bottom: 8px; font-weight: bold; }
+        .form-input { width: 100%; padding: 15px; background: #0f172a; border: 1px solid #334155; border-radius: 5px; color: #fff; outline: none; transition: 0.3s; }
+        .form-input:focus { border-color: var(--accent-color); }
+        .booking-info-list { list-style: none; padding: 0; }
+        .booking-info-list li { margin-bottom: 15px; color: #94a3b8; display: flex; align-items: center; font-size: 1.1rem; }
+        .booking-info-list i { color: var(--accent-color); margin-left: 10px; font-size: 1.2rem; }
+
+        /* =========================================
+           6. الفوتر (التعديلات النهائية)
+           ========================================= */
+        footer {
+            background-color: #050505;
+            padding: 80px 5% 30px;
+            color: #fff;
+            border-top: 1px solid #1e293b;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: start;
+        }
+
+        .footer-brand h2 { font-size: 2rem; font-weight: 800; margin-bottom: 20px; font-style: italic; }
+        .footer-brand h2 span { color: var(--accent-color); }
+        .footer-brand p { color: #94a3b8; line-height: 1.8; margin-bottom: 25px; font-size: 0.95rem; }
+
+        .social-icons { display: flex; gap: 10px; }
+        .social-btn {
+            width: 40px; height: 40px; border: 1px solid #333; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; text-decoration: none; transition: 0.3s;
+        }
+        .social-btn:hover { background: var(--accent-color); border-color: var(--accent-color); color: #000; }
+
+        .footer-col h3 { font-size: 1.2rem; margin-bottom: 25px; color: #fff; font-weight: 700; }
+        
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a { color: #cbd5e1; text-decoration: none; transition: 0.3s; display: flex; align-items: center; font-size: 0.95rem; }
+        .footer-links a::before { content: '\f104'; font-family: "Font Awesome 6 Free"; font-weight: 900; margin-left: 10px; font-size: 0.8rem; color: var(--accent-color); }
+        .footer-links a:hover { color: var(--accent-color); transform: translateX(-5px); }
+
+        /* تنسيق قائمة التواصل */
+        .contact-list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* تنسيق الروابط داخل قائمة التواصل (للموقع تحديداً) */
+        .contact-link {
+            text-decoration: none;
+            display: block; /* لجعل العنصر بأكمله قابلاً للضغط */
+            transition: 0.3s;
+        }
+        .contact-link:hover .c-icon-box {
+            transform: scale(1.1);
+        }
+        .contact-link:hover .c-value {
+            color: var(--accent-color);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+        
+        .c-icon-box {
+            width: 55px; height: 55px; 
+            background-color: var(--accent-color);
+            border-radius: 12px; 
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: #fff; flex-shrink: 0;
+            transition: 0.3s;
+        }
+
+        .c-text {
+            display: flex; flex-direction: column; justify-content: center; text-align: right;
+        }
+        
+        .c-label {
+            font-weight: 800; color: #fff; margin-bottom: 5px; font-size: 1.1rem;
+        }
+        
+        .c-value {
+            color: #cbd5e1; font-size: 0.95rem; font-family: 'Tajawal', sans-serif; transition: 0.3s;
+        }
+        .c-value.en-font { font-family: sans-serif; letter-spacing: 0.5px; direction: ltr; text-align: right; }
+
+        .copyright { text-align: center; border-top: 1px solid #1e293b; padding-top: 25px; color: #64748b; font-size: 0.9rem; }
+
+        /* =========================================
+           7. الشاشة المنبثقة للخدمات
+           ========================================= */
+        .full-services-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.98); z-index: 3000; display: none; opacity: 0; transition: opacity 0.4s ease; overflow-y: auto; padding: 50px 5%; }
+        .full-services-overlay.active { display: block; opacity: 1; }
+        .overlay-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; border-bottom: 1px solid #334155; padding-bottom: 20px; }
+        .close-overlay { font-size: 3rem; color: #94a3b8; cursor: pointer; transition: 0.3s; }
+        .close-overlay:hover { color: var(--accent-color); }
+        .services-grid-detailed { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
+        .detailed-card { background: #1e293b; padding: 30px; border-radius: 12px; border: 1px solid #334155; transition: 0.3s; display: flex; flex-direction: column; align-items: flex-start; }
+        .detailed-card:hover { border-color: var(--accent-color); transform: translateY(-5px); }
+        .d-icon { width: 60px; height: 60px; background: rgba(245, 158, 11, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--accent-color); margin-bottom: 20px; }
+        .detailed-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: #fff; }
+        .detailed-card p { color: #94a3b8; line-height: 1.7; font-size: 1rem; margin-bottom: 20px; }
+        .detailed-card ul { list-style: none; width: 100%; margin-top: auto; padding: 0; }
+        .detailed-card ul li { padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.05); color: #cbd5e1; font-size: 0.9rem; display: flex; align-items: center; }
+        .detailed-card ul li::before { content: '•'; color: var(--accent-color); margin-left: 10px; font-size: 1.5rem; line-height: 0; }
+
+        @media screen and (max-width: 900px) {
+            .hero { flex-direction: column; padding-top: 120px; text-align: center; justify-content: center; }
+            .hero-text { width: 100%; margin-bottom: 50px; }
+            .hero-image { width: 100%; }
+            .booking-grid { grid-template-columns: 1fr; }
+            .section-header h2 { font-size: 2rem; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .contact-item { justify-content: center; }
+            .c-text { text-align: right; }
+            .footer-links a { justify-content: center; }
+            .social-icons { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">CAR<span>MEX</span></div>
+        <nav class="nav-menu">
+            <a href="#home">الرئيسية</a>
+            <a href="#services">الخدمات</a>
+            <a href="#booking">حجز موعد</a>
+        </nav>
+        <a href="#booking" class="cta-btn"><span>احجز الآن</span></a>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-shape"></div>
+        <div class="hero-text">
+            <h1 style="font-style: italic;">CAR<span>MEX</span><br>رعاية احترافية</h1>
+            <p>نقدم لك في كارمكس مستوى جديد كلياً من العناية. دقة هندسية، قطع غيار أصلية، وضمان يريح بالك.</p>
+            <div style="display: flex; gap: 15px; margin-top: 20px; justify-content: center;">
+                <a href="#services" class="cta-btn"><span>اكتشف خدماتنا</span></a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=1000&auto=format&fit=crop" alt="Luxury Car">
+        </div>
+    </section>
+
+    <div class="features-strip">
+        <div class="feature-box">
+            <i class="fas fa-check-double"></i>
+            <h3>جودة مضمونة</h3>
+            <p>نستخدم قطع غيار أصلية فقط مع ضمان شامل على العمل.</p>
+        </div>
+        <div class="feature-box">
+            <i class="fas fa-user-clock"></i>
+            <h3>التزام بالوقت</h3>
+            <p>جدول زمني دقيق لكل عملية صيانة لضمان التسليم.</p>
+        </div>
+        <div class="feature-box">
+            <i class="fas fa-tools"></i>
+            <h3>تقنيات متطورة</h3>
+            <p>أحدث أجهزة الفحص والتشخيص العالمية.</p>
+        </div>
+    </div>
+
+    <section class="services-section" id="services">
+        <div class="section-header">
+            <div>
+                <span style="color:var(--accent-color); font-weight:bold; letter-spacing:2px;">خدمات كارمكس</span>
+                <h2>حلول متكاملة لسيارتك</h2>
+            </div>
+            <a href="javascript:void(0)" id="view-all-btn" class="view-all-link">عرض التفاصيل الكاملة <i class="fas fa-arrow-left"></i></a>
+        </div>
+
+        <div class="services-container">
+            <div class="service-card-tall">
+                <div class="service-overlay">
+                    <h3>ميكانيكا عامة</h3>
+                    <p>صيانة شاملة للمحركات، توضيب القير، وفحص نظام التعليق والعضلات لضمان أداء مثالي.</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?q=80&w=800&auto=format&fit=crop" alt="Mechanic">
+            </div>
+            
+            <div class="service-card-tall">
+                <div class="service-overlay">
+                    <h3>تلميع ونانو</h3>
+                    <p>غسيل VIP، تلميع داخلي وخارجي، وطبقات حماية نانو سيراميك لاستعادة لمعان الوكالة.</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?q=80&w=800&auto=format&fit=crop" alt="Detailing">
+            </div>
+            
+            <div class="service-card-tall">
+                <div class="service-overlay">
+                    <h3>كهرباء وبرمجة</h3>
+                    <p>تشخيص أعطال الكمبيوتر، برمجة الحساسات، وإصلاح الضفائر والأنظمة الإلكترونية المعقدة.</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=800&auto=format&fit=crop" alt="Electric">
+            </div>
+            
+            <div class="service-card-tall">
+                <div class="service-overlay">
+                    <h3>سمكرة ودهان</h3>
+                    <p>إصلاح الصدمات، تعديل البارد (PDR)، ورش فرن حراري بألوان مطابقة تماماً للمصنع.</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?q=80&w=800&auto=format&fit=crop" alt="Paint">
+            </div>
+        </div>
+    </section>
+
+    <section class="booking-section" id="booking">
+        <div class="booking-grid">
+            <div class="booking-text">
+                <h2 style="font-size:3rem; color:#fff; line-height:1.2;">احجز موعدك <br><span style="color:var(--accent-color)">أونلاين</span></h2>
+                <p style="color:#94a3b8; margin: 20px 0;">سجل بياناتك هنا وسيصلنا إيميل فوري بطلبك. سنتواصل معك لتأكيد الموعد بأسرع وقت.</p>
+                <ul class="booking-info-list">
+                    <li><i class="fas fa-check-circle"></i> كشف أولي مجاني</li>
+                    <li><i class="fas fa-check-circle"></i> خصم 15% للحجوزات الأونلاين</li>
+                    <li><i class="fas fa-check-circle"></i> ضمان على جميع الإصلاحات</li>
+                </ul>
+            </div>
+            
+            <form action="https://formspree.io/f/mdkvzzvq" method="POST" class="booking-form">
+                <input type="hidden" name="_subject" value="طلب حجز جديد من كارمكس">
+                <div class="form-group">
+                    <label>نوع السيارة والموديل</label>
+                    <input type="text" name="car_model" class="form-input" placeholder="مثال: فورد توروس 2021" required>
+                </div>
+                <div class="form-group">
+                    <label>الخدمة المطلوبة</label>
+                    <select name="service_type" class="form-input">
+                        <option value="صيانة دورية">صيانة دورية (زيت وفلاتر)</option>
+                        <option value="ميكانيكا وإصلاح">ميكانيكا وإصلاح أعطال</option>
+                        <option value="سمكرة ودهان">سمكرة ودهان</option>
+                        <option value="تلميع ونانو">تلميع ونانو سيراميك</option>
+                        <option value="فحص شامل">فحص وبرمجة كمبيوتر</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>رقم الجوال</label>
+                    <input type="tel" name="phone" class="form-input" placeholder="05xxxxxxxx" required>
+                </div>
+                <button type="submit" class="cta-btn" style="width:100%; border:none; cursor:pointer;"><span>تأكيد وإرسال الطلب</span></button>
+            </form>
+        </div>
+    </section>
+
+    <div id="full-services-overlay" class="full-services-overlay">
+        <div class="overlay-header">
+            <h2 style="color:#fff;">دليل خدمات <span style="color:var(--accent-color)">كارمكس</span></h2>
+            <div class="close-overlay" id="close-overlay">×</div>
+        </div>
+        <div class="services-grid-detailed">
+            <div class="detailed-card">
+                <div class="d-icon"><i class="fas fa-oil-can"></i></div>
+                <h3>الصيانة الدورية</h3>
+                <p>خدمة للحفاظ على عمر محرك سيارتك.</p>
+                <ul><li>تغيير زيت المحرك (تخليقي).</li><li>تغيير الفلاتر (زيت، هواء، مكيف).</li><li>فحص السوائل وتشحيم الأبواب.</li></ul>
+            </div>
+            <div class="detailed-card">
+                <div class="d-icon"><i class="fas fa-cogs"></i></div>
+                <h3>الميكانيكا الثقيلة</h3>
+                <p>إصلاح الأعطال المعقدة في المحرك والقير.</p>
+                <ul><li>توضيب المحركات.</li><li>إصلاح مشاكل القير الأوتوماتيك.</li><li>صيانة نظام التعليق والعضلات.</li></ul>
+            </div>
+            <div class="detailed-card">
+                <div class="d-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>فحص وبرمجة</h3>
+                <p>تشخيص دقيق للأعطال الإلكترونية.</p>
+                <ul><li>فحص شامل بالكمبيوتر.</li><li>برمجة الثروتل والحساسات.</li><li>إطفاء لمبات التحذير.</li></ul>
+            </div>
+            <div class="detailed-card">
+                <div class="d-icon"><i class="fas fa-gem"></i></div>
+                <h3>نانو وحماية</h3>
+                <p>حماية الطلاء ولمعان يدوم طويلاً.</p>
+                <ul><li>طبقات نانو سيراميك 9H.</li><li>حماية PPF للمقدمة.</li><li>تلميع مائي خارجي.</li></ul>
+            </div>
+            <div class="detailed-card">
+                <div class="d-icon"><i class="fas fa-snowflake"></i></div>
+                <h3>صيانة التكييف</h3>
+                <p>ضمان برودة مثالية في الصيف.</p>
+                <ul><li>تعبئة فريون أصلي.</li><li>تنظيف الثلاجة وتغيير الفلتر.</li></ul>
+            </div>
+            <div class="detailed-card">
+                <div class="d-icon"><i class="fas fa-car-crash"></i></div>
+                <h3>سمكرة ودهان</h3>
+                <p>إعادة السيارة لحالة الوكالة.</p>
+                <ul><li>شفط صدمات (PDR).</li><li>رش فرن حراري.</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h2>CAR<span>MEX</span> <i class="fas fa-bolt" style="color:var(--accent-color); font-size:1.5rem;"></i></h2>
+                <p>مركز متكامل في القصيم، عنيزة. نقدم أفضل تجربة صيانة للسيارات باستخدام أحدث التقنيات.</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/carmix.sa?igsh=MWNqcHlnaGZpems0MA%3D%3D&utm_source=qr" target="_blank" class="social-btn">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://snapchat.com/t/PKjnaCak" target="_blank" class="social-btn">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://snapchat.com/t/pyk9Oqyp" target="_blank" class="social-btn">
+                        <i class="fab fa-snapchat-ghost"></i>
+                    </a>
+                    <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#services">الخدمات</a></li>
+                    <li><a href="#booking">حجز موعد</a></li>
+                    <li><a href="#">الأسعار</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>المزيد</h3>
+                <ul class="footer-links">
+                    <li><a href="#">عن المركز</a></li>
+                    <li><a href="#">فريق العمل</a></li>
+                    <li><a href="#">الأسئلة الشائعة</a></li>
+                    <li><a href="#">سياسة الضمان</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>تواصل معنا</h3>
+                
+                <div class="contact-list-container">
+                    
+                    <a href="https://maps.app.goo.gl/68YuZ11RvKuqhPWw9" target="_blank" class="contact-link">
+                        <div class="contact-item">
+                            <div class="c-icon-box">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="c-text">
+                                <span class="c-label">الموقع</span>
+                                <span class="c-value">القصيم، عنيزة - الصناعية</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <div class="contact-item">
+                        <div class="c-icon-box">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="c-text">
+                            <span class="c-label">الهاتف</span>
+                            <span class="c-value en-font">050 666 1632</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="c-icon-box">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="c-text">
+                            <span class="c-label">البريد الإلكتروني</span>
+                            <span class="c-value en-font">info@carmex.sa</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            © 2025 كارمكس للعناية بالسيارات. جميع الحقوق محفوظة.
+        </div>
+    </footer>
+
+    <script>
+        const viewAllBtn = document.getElementById('view-all-btn');
+        const overlay = document.getElementById('full-services-overlay');
+        const closeBtn = document.getElementById('close-overlay');
+
+        viewAllBtn.addEventListener('click', function() {
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeBtn.addEventListener('click', function() {
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
