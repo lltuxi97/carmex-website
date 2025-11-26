@@ -17,6 +17,7 @@
             --accent-color: #f59e0b;     
             --text-light: #f1f5f9;
             --border-glass: rgba(255, 255, 255, 0.1);
+            --whatsapp-color: #25D366; /* لون الواتساب */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; scroll-behavior: smooth; }
@@ -103,7 +104,7 @@
         .service-card-tall:hover .service-overlay { background: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(15,23,42,0.8) 100%); }
 
         /* =========================================
-           5. قسم الحجز
+           5. قسم الحجز (مع زر الواتساب الجديد)
            ========================================= */
         .booking-section { padding: 80px 5%; background: var(--main-dark); border-top: 1px solid #333; }
         .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
@@ -116,8 +117,40 @@
         .booking-info-list li { margin-bottom: 15px; color: #94a3b8; display: flex; align-items: center; font-size: 1.1rem; }
         .booking-info-list i { color: var(--accent-color); margin-left: 10px; font-size: 1.2rem; }
 
+        /* زر الواتساب الجديد */
+        .whatsapp-btn {
+            background: var(--whatsapp-color);
+            color: #fff;
+            width: 100%;
+            padding: 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            transform: skewX(-10deg);
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .whatsapp-btn span { transform: skewX(10deg); font-size: 1.1rem; }
+        .whatsapp-btn i { transform: skewX(10deg); font-size: 1.3rem; }
+        .whatsapp-btn:hover { background: #128C7E; transform: skewX(-10deg) translateY(-3px); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
+
+        .divider {
+            text-align: center; margin: 15px 0; color: #64748b; font-size: 0.9rem; position: relative;
+        }
+        .divider::before, .divider::after {
+            content: ''; position: absolute; top: 50%; width: 40%; height: 1px; background: #334155;
+        }
+        .divider::before { left: 0; }
+        .divider::after { right: 0; }
+
         /* =========================================
-           6. الفوتر (التعديلات النهائية)
+           6. الفوتر (المعدل)
            ========================================= */
         footer {
             background-color: #050505;
@@ -154,53 +187,23 @@
         .footer-links a::before { content: '\f104'; font-family: "Font Awesome 6 Free"; font-weight: 900; margin-left: 10px; font-size: 0.8rem; color: var(--accent-color); }
         .footer-links a:hover { color: var(--accent-color); transform: translateX(-5px); }
 
-        /* تنسيق قائمة التواصل */
-        .contact-list-container {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
+        .contact-list-container { display: flex; flex-direction: column; gap: 25px; }
+        
+        .contact-link { text-decoration: none; display: block; transition: 0.3s; }
+        .contact-link:hover .c-icon-box { transform: scale(1.1); }
+        .contact-link:hover .c-value { color: var(--accent-color); }
 
-        /* تنسيق الروابط داخل قائمة التواصل (للموقع تحديداً) */
-        .contact-link {
-            text-decoration: none;
-            display: block; /* لجعل العنصر بأكمله قابلاً للضغط */
-            transition: 0.3s;
-        }
-        .contact-link:hover .c-icon-box {
-            transform: scale(1.1);
-        }
-        .contact-link:hover .c-value {
-            color: var(--accent-color);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            width: 100%;
-        }
+        .contact-item { display: flex; align-items: center; gap: 15px; width: 100%; }
         
         .c-icon-box {
-            width: 55px; height: 55px; 
-            background-color: var(--accent-color);
-            border-radius: 12px; 
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem; color: #fff; flex-shrink: 0;
-            transition: 0.3s;
+            width: 55px; height: 55px; background-color: var(--accent-color);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: #fff; flex-shrink: 0; transition: 0.3s;
         }
 
-        .c-text {
-            display: flex; flex-direction: column; justify-content: center; text-align: right;
-        }
-        
-        .c-label {
-            font-weight: 800; color: #fff; margin-bottom: 5px; font-size: 1.1rem;
-        }
-        
-        .c-value {
-            color: #cbd5e1; font-size: 0.95rem; font-family: 'Tajawal', sans-serif; transition: 0.3s;
-        }
+        .c-text { display: flex; flex-direction: column; justify-content: center; text-align: right; }
+        .c-label { font-weight: 800; color: #fff; margin-bottom: 5px; font-size: 1.1rem; }
+        .c-value { color: #cbd5e1; font-size: 0.95rem; font-family: 'Tajawal', sans-serif; transition: 0.3s; }
         .c-value.en-font { font-family: sans-serif; letter-spacing: 0.5px; direction: ltr; text-align: right; }
 
         .copyright { text-align: center; border-top: 1px solid #1e293b; padding-top: 25px; color: #64748b; font-size: 0.9rem; }
@@ -357,7 +360,16 @@
                     <label>رقم الجوال</label>
                     <input type="tel" name="phone" class="form-input" placeholder="05xxxxxxxx" required>
                 </div>
+                
                 <button type="submit" class="cta-btn" style="width:100%; border:none; cursor:pointer;"><span>تأكيد وإرسال الطلب</span></button>
+                
+                <div class="divider">أو</div>
+                
+                <a href="https://wa.me/966506661632?text=السلام%20عليكم،%20أريد%20حجز%20موعد%20صيانة%20لسيارتي" target="_blank" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>احجز مباشرة عبر واتساب</span>
+                </a>
+
             </form>
         </div>
     </section>
